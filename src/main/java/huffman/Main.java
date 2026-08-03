@@ -1,5 +1,7 @@
 package huffman;
 
+import java.util.Map;
+
 public class Main {
     public static void main(String[] args) {
         int argsLength = args.length;
@@ -8,8 +10,16 @@ public class Main {
             System.out.println("Usage: java -jar huffman.jar [-c|-d] <input-file> [-o <output-file>]");
             System.exit(1);
         } else {
-            for (int i = 0; i < 2; i++) {
-                System.out.println(args[i]);
+            String mode = args[0];
+            String filePath = args[1];
+
+            if (mode.equals("-c")) {
+                try {
+                    Map<Byte, Long> frequencies = FrequencyTable.buildFrequencyTable(filePath);
+                    System.out.println(frequencies);
+                } catch (Exception e) {
+                    System.err.println("Error reading file: " + e.getMessage());
+                }
             }
         }
     }
