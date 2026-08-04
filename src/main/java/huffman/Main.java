@@ -16,7 +16,15 @@ public class Main {
             if (mode.equals("-c")) {
                 try {
                     Map<Byte, Long> frequencies = FrequencyTable.buildFrequencyTable(filePath);
-                    System.out.println(frequencies);
+                    System.out.println("Frequencies found: " + frequencies);
+
+                    Node node = HuffmanTree.buildTree(frequencies);
+                    if (node != null) {
+                        System.out.println("Is node a leaf? " + node.isLeaf());
+                        System.out.println(node.getFrequency());
+                    } else {
+                        System.out.println("File was empty, no tree built");
+                    }
                 } catch (Exception e) {
                     System.err.println("Error reading file: " + e.getMessage());
                 }
